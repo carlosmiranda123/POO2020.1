@@ -1,0 +1,238 @@
+package projetoPet;
+
+public class Pet {
+	 //energyMax, hungryMax, cleanMax  energy
+	private int energy;
+	private int hungry;
+	private int clean;
+	private int diamonds;
+	private int age;
+	private boolean alive;
+	private int energyMax = 3;
+	private int cleanmax = 3;
+	
+	public Pet(){
+		
+	}
+	
+	public Pet(int energy) {
+		this.energy = this.energyMax;
+		this.hungry = this.cleanmax;
+		this.clean = 0;
+		this.diamonds = 0;
+		this.age = 0;
+		this.alive = true;
+		
+	}
+	
+
+	public int getEnergyMax() {
+		return energyMax;
+	}
+
+	public int getCleanmax() {
+		return cleanmax;
+	}
+
+	public void setEnergyMax(int energyMax) {
+		this.energyMax = energyMax;
+	}
+
+	public void setCleanmax(int cleanmax) {
+		this.cleanmax = cleanmax;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public int getHungry() {
+		return hungry;
+	}
+
+	public int getClean() {
+		return clean;
+	}
+
+	public int getDiamonds() {
+		return diamonds;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	public void setHungry(int hungry) {
+		this.hungry = hungry;
+	}
+
+	public void setClean(int clean) {
+		this.clean = clean;
+	}
+
+	public void setDiamonds(int diamonds) {
+		this.diamonds = diamonds;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	
+	public boolean brincar() {
+		System.out.println("Brincando...");
+		
+		if(this.energy <= 0 || this.clean <= 0){
+			this.alive = false;
+			System.out.println("Seu pet morreu sem energy!");
+			System.out.println("Seu pet morreu sujo!");
+		}
+		else{
+		this.diamonds += 1;
+		this.hungry += 1;
+		this.energy -= 1;
+		this.clean -= 1;
+		this.age += 1;
+		this.alive = true;
+		}
+		
+		return alive;
+		
+	}
+	
+	public boolean banho() {
+		System.out.println("Tomando banho...");
+		if (this.clean == this.cleanmax) {
+			System.out.println("Seu pet está clean!");
+			
+			
+		}else if(this.energy <= 0 || this.clean <= 0){
+			this.alive = false;
+			System.out.println("Seu pet morreu sem energy!");
+			System.out.println("Seu pet morreu sujo!");
+		}
+		else {
+		this.clean += 1;
+		this.hungry += 1;
+		this.energy -= 1;
+		this.age += 1;
+		}
+		return alive;
+	}
+	
+	public boolean comer() {
+		System.out.println("Comendo...");
+		
+		 if(this.energy <= 0 || this.clean <= 0){
+			this.alive = false;
+			System.out.println("Seu pet morreu sem energy!");
+			System.out.println("Seu pet morreu sujo!");
+		}
+		 
+		 else if(this.hungry == 0) {
+			System.out.println("Seu pet não estar com hungry");
+				
+		}
+		else {
+		
+		this.energy += 1;
+		this.hungry -= 1;
+		this.clean -= 1;
+		this.age += 1;
+		}
+		return alive;
+	}
+	
+	public boolean dormir() {
+		System.out.println("Dormindo...");
+		
+		if(this.energy == this.energyMax) {
+			System.out.println("Seu pet esta com energy maxima");
+			
+		}else if(this.energy <= 0 || this.clean <= 0){
+			this.alive = false;
+			System.out.println("Seu pet morreu sem energy!");
+			System.out.println("Seu pet morreu sujo!");
+		}
+		else {
+		this.energy += 1;
+		this.age += 1;
+		}
+		return alive;
+	}
+
+
+
+}
+
+
+
+
+
+
+
+package projetoPet;
+
+import java.util.Scanner;
+
+
+
+
+public class Testar {
+	
+	public static void main(String[] args) {
+		
+	Scanner scan = new Scanner(System.in);
+	Pet pet = new Pet();	
+	pet.setEnergy(3);
+	pet.setClean(3);
+
+
+	while (true) { 
+		String line = scan.nextLine();
+		System.out.println("$" + line);
+		if (line.equals("end"))
+			break;
+		String ui[] = line.split(" ");
+		
+		
+		if (ui[0].equals("show")) {
+			System.out.println("Diamante: " + pet.getDiamonds() + "\nEnergia: " + pet.getEnergy() + "\nFaminto: " + pet.getHungry() + "\nlimpo: " + pet.getClean() + "\nidade: " + pet.getAge());
+		}
+		
+		else if (ui[0].equals("play")) {
+			pet.brincar();
+		}
+		else if (ui[0].equals("shower")) {
+			pet.banho();
+		}
+    
+    
+    
+    
+		else if (ui[0].equals("eat")) {
+			pet.comer();
+		}
+		else if (ui[0].equals("sleep")) {
+			pet.dormir();
+		}
+	}
+	
+}
+
+}
+
+
+
+
